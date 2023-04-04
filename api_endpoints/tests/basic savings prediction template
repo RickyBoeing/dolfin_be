@@ -1,0 +1,21 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# fake data
+income = np.random.normal(50000, 10000, 1000)
+age = np.random.normal(30, 5, 1000)
+Expenses = np.random.normal(30000, 1000, 1000)
+savings = np.random.normal(income*0.2, 10000, 1000)
+
+# add the features into an array & shape for sklearn
+X = np.column_stack((income, age, Expenses))
+savings = savings.reshape(-1, 1)
+
+# creating the model & using to train it on data
+model = LinearRegression()
+model.fit(X, savings)
+
+# using model on new_data to make predictions based on training set
+new_data = np.array([[60000, 35, 10000], [70000, 40, 15000], [80000, 25, 20000]])
+predicted_savings = model.predict(new_data)
+print(predicted_savings)
